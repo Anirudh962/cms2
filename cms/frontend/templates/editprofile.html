@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editprofile</title>
+</head>
+<body>
+    <form name="lessonplanedit" method="POST" action="/updatelessp/{{ lessp.lsid }}/">
+        {% csrf_token %}
+        <table id="lessonplan-table">
+            <!-- Table headers -->
+            <thead>
+                <tr>
+                    <th>LPid</th>
+                    <th>Desc</th>
+                    <th>Cosn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="lpid" value="{{ entry.lpid }}"></td>
+                    <td><input type="text" name="desc" value="{{ entry.desc }}"></td>
+                    <td><input type="text" name="cosn" value="{{ entry.cosn }}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>

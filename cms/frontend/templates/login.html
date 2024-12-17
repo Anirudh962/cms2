@@ -1,0 +1,158 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+
+<div class="row-justify-content-center">
+    <div class="col-sm-6">
+        <h2 class="text-muted">Login</h2>
+        {% if form.non_field_errors %}
+        <small class="text-danger">
+            {{ form.non_field_errors.as_ul }}
+        </small>
+        {% endif %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label}}">Username:</label>
+                <input type="text" name="{{ form.username.name}}" class="form-control" value="{{ form.username.value }}" />
+                <span class="text-danger">{{ form.username.errors }}</span>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label}}">Password:</label>
+                <input type="password" name="{{ form.password.name}}" class="form-control" value="{{ form.password.value }}" />
+                <span class="text-danger">{{ form.password.errors }}</span>
+            </div>
+            <button type="submit" class="btn btn-dark">Login</button>
+            <a href="{% url 'register' %}" class="btn btn-default">Create new user</a>
+        </form>
+    </div>
+</div>
+<style>
+    /* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7; /* Light background color */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Centering the Row */
+.row-justify-content-center {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;           /* Full height of the viewport */
+}
+
+/* Container for the Form */
+.col-sm-6 {
+    background-color: #ffffff; /* White background for the form container */
+    padding: 30px;
+    border-radius: 8px;        /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 100%;
+    max-width: 400px;          /* Maximum width for the form */
+}
+
+/* Header Styling */
+h2.text-muted {
+    text-align: center;
+    font-size: 24px;
+    color: #4e3629; /* Dark brown color */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 20px; /* Space between form fields */
+}
+
+/* Label Styling */
+label {
+    font-size: 16px;
+    color: #4e3629; /* Dark brown */
+    display: block;
+    margin-bottom: 8px; /* Space below label */
+}
+
+/* Input Field Styling */
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Light gray border */
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Space below input field */
+}
+
+/* Error Message Styling */
+.text-danger {
+    font-size: 14px;
+    color: #e74c3c; /* Red color for error messages */
+}
+
+/* Button Styling */
+button[type="submit"], a.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Login Button Styling */
+button[type="submit"] {
+    background-color: #f2c9a7; /* Skin-tone background color */
+    color: #4e3629; /* Dark brown text */
+    margin-bottom: 10px; /* Space below the button */
+}
+
+/* Button Hover Effect */
+button[type="submit"]:hover {
+    background-color: #e59b75; /* Slightly darker skin-tone on hover */
+}
+
+/* Create New User Button Styling */
+a.btn-default {
+    background-color: #ddd; /* Light gray background */
+    color: #333; /* Dark text color */
+    text-align: center;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+}
+
+/* Create New User Button Hover Effect */
+a.btn-default:hover {
+    background-color: #ccc; /* Slightly darker gray on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .col-sm-6 {
+        width: 100%;
+        padding: 15px;
+    }
+
+    h2.text-muted {
+        font-size: 20px;
+    }
+
+    input.form-control {
+        font-size: 14px;
+    }
+
+    button[type="submit"], a.btn {
+        font-size: 14px;
+    }
+}
+
+    
+</style>
+
+{% endblock %}

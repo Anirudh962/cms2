@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Frontend with Buttons and Year Dropdown</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7; /* Light background for the page */
+    color: #333; /* Dark text color for better readability */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #4e3629; /* Dark brown color */
+    margin-bottom: 20px;
+}
+
+h3, h4 {
+    font-size: 20px;
+    color: #4e3629; /* Dark brown color */
+    margin-bottom: 10px;
+}
+
+/* Container Styling */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+    text-align: center; /* Align the content in the center */
+    margin-bottom: 30px; /* Add some space below the container */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove gaps between table cells */
+    background-color: #ffffff; /* White background for the table */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Space below the table */
+}
+
+/* Table Header Styling */
+thead {
+    background-color: #f2c9a7; /* Light skin-tone background color */
+    color: #4e3629; /* Dark brown color for text */
+    font-weight: bold;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table Cell Styling (Input Fields) */
+td {
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border for table cells */
+    text-align: left;
+}
+
+/* Hover Effect on Table Rows */
+tbody tr:hover {
+    background-color: #f9f3e3; /* Light skin-tone color on hover */
+}
+
+/* Zebra Striping for Table Rows */
+tbody tr:nth-child(even) {
+    background-color: #faf0e6; /* Light beige background for even rows */
+}
+
+/* Links Styling in Table */
+a {
+    color: #4e3629; /* Dark brown color for links */
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+a:hover {
+    background-color: #f2c9a7; /* Skin-tone background for hover */
+    color: #ffffff; /* White text on hover */
+    border-radius: 5px;
+}
+
+/* Dropdown and Button Styling */
+select, button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #f2c9a7; /* Skin-tone background */
+    color: #4e3629; /* Dark brown text */
+    border: none;
+    cursor: pointer;
+}
+
+button:hover, select:hover {
+    background-color: #e59b75; /* Slightly darker skin-tone on hover */
+}
+
+/* Centering the Table */
+table {
+    margin: 0 auto; /* Center the table horizontally */
+}
+
+/* Styling for the Add Row and Submit buttons */
+button[type="button"], button[type="submit"] {
+    background-color: #f2c9a7; /* Skin-tone background */
+    color: #4e3629;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover, button[type="submit"]:hover {
+    background-color: #e59b75; /* Slightly darker skin-tone on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    td, th {
+        padding: 10px;
+    }
+
+    select, button {
+        font-size: 14px; /* Smaller font size for mobile input fields */
+    }
+
+    /* Stack the form elements vertically on smaller screens */
+    form {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h1>lessonplan: {{ request.user.username }}</h1>
+    <a href="{% url 'logout' %}" class="btn btn-dark">Logout</a>
+
+    <div class="container">
+        <!-- Dropdown for selecting the academic year -->
+        <h3>Academic Year</h3>
+        <select id="yearDropdown" name="academic_year">
+            <!-- JavaScript will dynamically generate the academic years -->
+        </select>
+
+        <h4>Previous Academic Year</h4>
+
+        <!-- Dropdown for selecting the previous academic year -->
+        <select id="pyearDropdown" name="Previous_academic_year">
+            <!-- JavaScript will dynamically generate the academic years -->
+        </select>
+    </div>
+
+    <button onclick="showTable()">Show Input Fields</button>
+    <div class="container">
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>LPid </th>
+                    <th>Desc</th>
+                    <th>Cosn</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for lp in lessonplan %}
+            <tr>
+                <td>{{ lp.lsid }}</td>
+                <td>{{ lp.descp }}</td>
+                <td>{{ lp.cosn }}</td>
+                <td>
+                    <a href="/editprofile/{{ lp.lsid }}"> Edit </a>
+                </td>
+                <td>
+                    <a href="/deleteprofile/{{ lp.lsid }}"> Delete </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form name="lessonplan" method="POST" action="/home/insertlp/">
+        {% csrf_token %}
+        <table id="lessonplan-table">
+            <!-- Table headers -->
+            <thead>
+                <tr>
+                    <th>LPid</th>
+                    <th>Desc</th>
+                    <th>Cosn</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through previously entered contents (using Django template or backend logic) -->
+                {% for entry in previous_entries %}
+                <tr>
+                    <td><input type="text" name="lpid" value="{{ entry.lpid }}"></td>
+                    <td><input type="text" name="desc" value="{{ entry.desc }}"></td>
+                    <td><input type="text" name="cosn" value="{{ entry.cosn }}"></td>
+                    <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="button" onclick="addRow()">Add Row</button>
+        <button type="submit">Submit</button>
+    </form>
+    
+        
+
+    
+
+    <script>
+        function showTable() {
+            // Show the table when the button is clicked
+            document.getElementById("inputTable").style.display = "block";
+        }
+        // Get the current year
+        const currentYear = new Date().getFullYear();
+
+        // Generate the academic years (e.g., 2023-2024, 2024-2025)
+        const academicYears = [];
+        for (let year = currentYear; year <= (currentYear + 4); year++) {
+            academicYears.push(`${year}-${year + 1}`);
+        }
+
+        // Get the year dropdown element for the current academic year
+        const yearDropdown = document.getElementById("yearDropdown");
+
+        // Generate the previous academic years (e.g., 2019-2020, 2020-2021, etc.)
+        const pacademicYears = [];
+        for (let year = currentYear - 1; year >= (currentYear - 5); year--) {
+            pacademicYears.push(`${year}-${year + 1}`);
+        }
+
+        // Get the year dropdown element for the previous academic year
+        const pyearDropdown = document.getElementById("pyearDropdown");
+
+        // Populate the current academic year dropdown
+        academicYears.forEach(function(year) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearDropdown.appendChild(option);
+        });
+
+        // Populate the previous academic year dropdown
+        pacademicYears.forEach(function(year) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            pyearDropdown.appendChild(option);
+        });
+
+
+        function addRow() {
+        const table = document.getElementById("lessonplan-table").getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow(table.rows.length); // Add a new row at the end
+
+        // Create and append the cells for the new row
+        const lpidCell = newRow.insertCell(0);
+        const descCell = newRow.insertCell(1);
+        const cosnCell = newRow.insertCell(2);
+        const actionCell = newRow.insertCell(3);
+
+        // Add input fields for the new row
+        lpidCell.innerHTML = '<input type="text" name="lpid">';
+        descCell.innerHTML = '<input type="text" name="desc">';
+        cosnCell.innerHTML = '<input type="text" name="cosn">';
+        actionCell.innerHTML = '<button type="button" onclick="removeRow(this)">Remove</button>';
+    }
+
+    // Function to remove a row
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
+    </script>
+
+</body>
+</html>

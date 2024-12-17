@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+</head>
+<body>
+
+    <div class="container">
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Contact Hours</th>
+                    <th>Marks</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for co in course_outcomes %}
+                <tr>
+                    <td>{{ co.course_name }}</td>
+                    <td>{{ co.description }}</td>
+                    <td>{{ co.contact_hours }}</td>
+                    <td>{{ co.marks }}</td>
+                    <td class="action-links">
+                        <a href="/editprofile/{{ co.course_name }}">Edit</a>
+                        <a href="/deleteprofile/{{ co.course_name }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

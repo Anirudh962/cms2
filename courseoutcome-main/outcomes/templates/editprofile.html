@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editprofile</title>
+    <style>
+        /* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7; /* Light background for the page */
+    color: #333; /* Dark text color for better readability */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container Styling */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove gaps between table cells */
+    background-color: #ffffff; /* White background for the table */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Space below the table */
+}
+
+/* Table Header Styling */
+thead {
+    background-color: #f2c9a7; /* Light skin-tone background color */
+    color: #4e3629; /* Dark brown color for text */
+    font-weight: bold;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table Cell Styling (Input Fields) */
+td {
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border for table cells */
+    text-align: left;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9; /* Slightly off-white background */
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Hover Effect on Table Rows */
+tbody tr:hover {
+    background-color: #f9f3e3; /* Light skin-tone color on hover */
+}
+
+/* Zebra Striping for Table Rows */
+tbody tr:nth-child(even) {
+    background-color: #faf0e6; /* Light beige background for even rows */
+}
+
+/* Submit Button Styling */
+button {
+    background-color: #f2c9a7; /* Skin-tone background for buttons */
+    color: #4e3629; /* Dark brown text */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Space above the button */
+    display: inline-block; /* Align with the table */
+}
+
+button:hover {
+    background-color: #e59b75; /* Slightly darker skin tone on hover */
+}
+
+/* Centering the Table */
+form {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto; /* Center the form */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    td, th {
+        padding: 10px;
+    }
+
+    input[type="text"] {
+        font-size: 14px; /* Smaller font size for mobile input fields */
+    }
+
+    /* Stack the form elements vertically on smaller screens */
+    form {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <form name="editco" method="POST" action="/updateco/{{ course.course_name }}/">
+        {% csrf_token %}
+        <table id="co-table">
+            <!-- Table headers -->
+            <thead>
+                <tr>
+                    <th>course_name </th>
+                    <th>description</th>
+                    <th>contact_hours</th>
+                    <th>marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                        <td><input type="text" name="tucname" value="{{ entry.course_name }}"></td>
+                        <td><input type="text" name="tudes" value="{{ entry.description }}"></td>
+                        <td><input type="text" name="tuchours" value="{{ entry.contact_hours }}"></td>
+                        <td><input type="text" name="tumarks" value="{{ entry.marks }}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
