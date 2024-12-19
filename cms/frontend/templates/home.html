@@ -4,236 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django Frontend with Buttons and Year Dropdown</title>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <h2 class="text-center text-dark p-3 rounded shadow-lg mb-4" style="font-size: 36px; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">
+        Lesson Plan
+    </h2>
+    
+
     <style>
-        /* General Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7; /* Light background for the page */
-    color: #333; /* Dark text color for better readability */
-    margin: 0;
-    padding: 20px;
-}
+        /* Body styling with Bootstrap */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light background color */
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
 
-/* Header Styling */
-h1 {
-    font-size: 24px;
-    text-align: center;
-    color: #4e3629; /* Dark brown color */
-    margin-bottom: 20px;
-}
+        /* Form styling */
+        .form-container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
 
-h3, h4 {
-    font-size: 20px;
-    color: #4e3629; /* Dark brown color */
-    margin-bottom: 10px;
-}
+        /* Skin-tone header color */
+        thead {
+            background-color: #f2c9a7; /* Light skin-tone color */
+            color: #4e3629; /* Dark brown text */
+        }
 
-/* Container Styling */
-.container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto; /* Center the container */
-    text-align: center; /* Align the content in the center */
-    margin-bottom: 30px; /* Add some space below the container */
-}
+        /* Zebra striping for dynamically added rows */
+        tbody tr:nth-child(even) {
+            background-color: #faf0e6; /* Light skin-tone color */
+        }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse; /* Remove gaps between table cells */
-    background-color: #ffffff; /* White background for the table */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-    margin-bottom: 20px; /* Space below the table */
-}
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff; /* White color for odd rows */
+        }
 
-/* Table Header Styling */
-thead {
-    background-color: #f2c9a7; /* Light skin-tone background color */
-    color: #4e3629; /* Dark brown color for text */
-    font-weight: bold;
-}
+        /* Button Styles */
+        .btn {
+            border-radius: 5px; /* Rounded corners for all buttons */
+            margin-right: 10px; /* Space between buttons */
+        }
 
-th {
-    padding: 12px;
-    text-align: left;
-}
+        .form-control {
+            margin-bottom: 10px; /* Space below input fields */
+        }
 
-/* Table Cell Styling (Input Fields) */
-td {
-    padding: 12px;
-    border: 1px solid #ddd; /* Light gray border for table cells */
-    text-align: left;
-}
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .table-responsive {
+                margin-bottom: 20px;
+            }
+            .btn {
+                width: 100%; /* Make buttons full width on small screens */
+            }
 
-/* Hover Effect on Table Rows */
-tbody tr:hover {
-    background-color: #f9f3e3; /* Light skin-tone color on hover */
-}
-
-/* Zebra Striping for Table Rows */
-tbody tr:nth-child(even) {
-    background-color: #faf0e6; /* Light beige background for even rows */
-}
-
-/* Links Styling in Table */
-a {
-    color: #4e3629; /* Dark brown color for links */
-    text-decoration: none;
-    padding: 5px 10px;
-}
-
-a:hover {
-    background-color: #f2c9a7; /* Skin-tone background for hover */
-    color: #ffffff; /* White text on hover */
-    border-radius: 5px;
-}
-
-/* Dropdown and Button Styling */
-select, button {
-    padding: 10px;
-    margin: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: #f2c9a7; /* Skin-tone background */
-    color: #4e3629; /* Dark brown text */
-    border: none;
-    cursor: pointer;
-}
-
-button:hover, select:hover {
-    background-color: #e59b75; /* Slightly darker skin-tone on hover */
-}
-
-/* Centering the Table */
-table {
-    margin: 0 auto; /* Center the table horizontally */
-}
-
-/* Styling for the Add Row and Submit buttons */
-button[type="button"], button[type="submit"] {
-    background-color: #f2c9a7; /* Skin-tone background */
-    color: #4e3629;
-    padding: 12px 20px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="button"]:hover, button[type="submit"]:hover {
-    background-color: #e59b75; /* Slightly darker skin-tone on hover */
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    table {
-        width: 100%;
-        font-size: 14px; /* Smaller font size for mobile */
-    }
-
-    td, th {
-        padding: 10px;
-    }
-
-    select, button {
-        font-size: 14px; /* Smaller font size for mobile input fields */
-    }
-
-    /* Stack the form elements vertically on smaller screens */
-    form {
-        padding: 10px;
-    }
-}
-
+            .form-control {
+                font-size: 14px; /* Smaller font size for input fields */
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>lessonplan: {{ request.user.username }}</h1>
-    <a href="{% url 'logout' %}" class="btn btn-dark">Logout</a>
 
     <div class="container">
-        <!-- Dropdown for selecting the academic year -->
-        <h3>Academic Year</h3>
-        <select id="yearDropdown" name="academic_year">
-            <!-- JavaScript will dynamically generate the academic years -->
-        </select>
+              <!-- Logout Button -->
+        <a href="{% url 'logout' %}" class="btn btn-dark mb-4">Logout</a>
 
-        <h4>Previous Academic Year</h4>
+        <!-- Dropdown for selecting the academic year -->
+        <div class="form-group">
+            <h3 class="text-brown">Academic Year</h3>
+            <select id="yearDropdown" name="academic_year" class="form-control">
+                <!-- JavaScript will dynamically generate the academic years -->
+            </select>
+        </div>
 
         <!-- Dropdown for selecting the previous academic year -->
-        <select id="pyearDropdown" name="Previous_academic_year">
-            <!-- JavaScript will dynamically generate the academic years -->
-        </select>
+        <div class="form-group mt-4">
+            <h4 class="text-brown">Previous Academic Year</h4>
+            <select id="pyearDropdown" name="Previous_academic_year" class="form-control">
+                <!-- JavaScript will dynamically generate the academic years -->
+            </select>
+        </div>
+
+        <!-- Display table of lesson plans -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>LPid</th>
+                        <th>Description</th>
+                        <th>Cosn</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lp in lessonplan %}
+                    <tr>
+                        <td>{{ lp.lsid }}</td>
+                        <td>{{ lp.descp }}</td>
+                        <td>{{ lp.cosn }}</td>
+                        <td>
+                            <a href="/editprofile/{{ lp.lsid }}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/deleteprofile/{{ lp.lsid }}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Form to insert new lesson plans -->
+        <div class="form-container">
+            <h3 class="text-center">Add New Lesson Plan</h3>
+            <form name="lessonplan" method="POST" action="/home/insertlp/">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <table id="lessonplan-table" class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>LPid</th>
+                                <th>Description</th>
+                                <th>Cosn</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in previous_entries %}
+                            <tr>
+                                <td><input type="text" name="lpid" class="form-control" value="{{ entry.lpid }}"></td>
+                                <td><input type="text" name="desc" class="form-control" value="{{ entry.desc }}"></td>
+                                <td><input type="text" name="cosn" class="form-control" value="{{ entry.cosn }}"></td>
+                                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add Row Button and Submit Button -->
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-primary" onclick="addRow()">Add Row</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <button onclick="showTable()">Show Input Fields</button>
-    <div class="container">
-        <table class="table table-striped table-bordered table-sm">
-            <thead class="thead-dark">
-                <tr>
-                    <th>LPid </th>
-                    <th>Desc</th>
-                    <th>Cosn</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            {% for lp in lessonplan %}
-            <tr>
-                <td>{{ lp.lsid }}</td>
-                <td>{{ lp.descp }}</td>
-                <td>{{ lp.cosn }}</td>
-                <td>
-                    <a href="/editprofile/{{ lp.lsid }}"> Edit </a>
-                </td>
-                <td>
-                    <a href="/deleteprofile/{{ lp.lsid }}"> Delete </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <form name="lessonplan" method="POST" action="/home/insertlp/">
-        {% csrf_token %}
-        <table id="lessonplan-table">
-            <!-- Table headers -->
-            <thead>
-                <tr>
-                    <th>LPid</th>
-                    <th>Desc</th>
-                    <th>Cosn</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through previously entered contents (using Django template or backend logic) -->
-                {% for entry in previous_entries %}
-                <tr>
-                    <td><input type="text" name="lpid" value="{{ entry.lpid }}"></td>
-                    <td><input type="text" name="desc" value="{{ entry.desc }}"></td>
-                    <td><input type="text" name="cosn" value="{{ entry.cosn }}"></td>
-                    <td><button type="button" onclick="removeRow(this)">Remove</button></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <button type="button" onclick="addRow()">Add Row</button>
-        <button type="submit">Submit</button>
-    </form>
-    
-        
-
-    
-
+    <!-- JavaScript for adding/removing rows dynamically -->
     <script>
-        function showTable() {
-            // Show the table when the button is clicked
-            document.getElementById("inputTable").style.display = "block";
-        }
         // Get the current year
         const currentYear = new Date().getFullYear();
 
@@ -271,30 +198,36 @@ button[type="button"]:hover, button[type="submit"]:hover {
             pyearDropdown.appendChild(option);
         });
 
-
+        // Function to add a new row dynamically
         function addRow() {
-        const table = document.getElementById("lessonplan-table").getElementsByTagName('tbody')[0];
-        const newRow = table.insertRow(table.rows.length); // Add a new row at the end
+            const table = document.getElementById("lessonplan-table").getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow(table.rows.length); // Add a new row at the end
 
-        // Create and append the cells for the new row
-        const lpidCell = newRow.insertCell(0);
-        const descCell = newRow.insertCell(1);
-        const cosnCell = newRow.insertCell(2);
-        const actionCell = newRow.insertCell(3);
+            // Create and append the cells for the new row
+            const lpidCell = newRow.insertCell(0);
+            const descCell = newRow.insertCell(1);
+            const cosnCell = newRow.insertCell(2);
+            const actionCell = newRow.insertCell(3);
 
-        // Add input fields for the new row
-        lpidCell.innerHTML = '<input type="text" name="lpid">';
-        descCell.innerHTML = '<input type="text" name="desc">';
-        cosnCell.innerHTML = '<input type="text" name="cosn">';
-        actionCell.innerHTML = '<button type="button" onclick="removeRow(this)">Remove</button>';
-    }
+            // Add input fields for the new row
+            lpidCell.innerHTML = '<input type="text" name="lpid" class="form-control">';
+            descCell.innerHTML = '<input type="text" name="desc" class="form-control">';
+            cosnCell.innerHTML = '<input type="text" name="cosn" class="form-control">';
+            actionCell.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button>';
 
-    // Function to remove a row
+            // Apply alternating row colors
+            if (table.rows.length % 2 === 0) {
+                newRow.style.backgroundColor = '#faf0e6'; // Skin tone color for even rows
+            } else {
+                newRow.style.backgroundColor = '#ffffff'; // White color for odd rows
+            }
+        }
+
+        // Function to remove a row
         function removeRow(button) {
             const row = button.closest('tr');
             row.remove();
         }
-
     </script>
 
 </body>

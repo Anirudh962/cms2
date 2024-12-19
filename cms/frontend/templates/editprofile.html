@@ -4,26 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editprofile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom Skin-Tone Header Color */
+        .table th {
+            background-color: #f2c9a7; /* Skin-tone color */
+            color: #4e3629; /* Dark brown text */
+        }
+    </style>
 </head>
 <body>
-    <form name="lessonplanedit" method="POST" action="/updatelessp/{{ lessp.lsid }}/">
-        {% csrf_token %}
-        <table id="lessonplan-table">
-            <!-- Table headers -->
-            <thead>
-                <tr>
-                    <th>LPid</th>
-                    <th>Desc</th>
-                    <th>Cosn</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" name="lpid" value="{{ entry.lpid }}"></td>
-                    <td><input type="text" name="desc" value="{{ entry.desc }}"></td>
-                    <td><input type="text" name="cosn" value="{{ entry.cosn }}"></td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Edit Lesson Plan</h2>
+
+        <form name="lessonplanedit" method="POST" action="/updatelessp/{{ lessp.lsid }}/">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table id="lessonplan-table" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>LPid</th>
+                            <th>Description</th>
+                            <th>Cosn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="lpid" class="form-control" value="{{ entry.lpid }}"></td>
+                            <td><input type="text" name="desc" class="form-control" value="{{ entry.desc }}"></td>
+                            <td><input type="text" name="cosn" class="form-control" value="{{ entry.cosn }}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
